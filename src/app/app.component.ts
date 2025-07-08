@@ -2,13 +2,26 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { StudentComponent } from "./student/student.component";
 import { NavbarComponent } from "./navbar/navbar.component";
+import { CommonModule } from '@angular/common';
+import { PerfilUsuarioComponent } from "./perfil-usuario/perfil-usuario.component";
 
 @Component({
   selector: 'app-root',
-  imports: [StudentComponent, NavbarComponent],
+  imports: [StudentComponent, NavbarComponent, CommonModule, PerfilUsuarioComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'proyecto_prueba';
+  edad = 27;
+  isDisabled = false;
+  loading = true;
+  namesArray = ["Celeste", "Melissa", "Tati"];
+  myDate = new Date();
+
+  ngOnInit(){
+    setTimeout(()=>{
+      this.loading = false;
+    }, 1111);
+  }
 }

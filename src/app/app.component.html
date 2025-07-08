@@ -1,2 +1,19 @@
-<app-navbar></app-navbar>
+<app-navbar>{{title}}</app-navbar>
 <app-student></app-student>
+<div *ngIf="loading === false; else content" class="container">
+    {{ edad }}
+    <button [disabled]="isDisabled" (click)="edad = edad +1">Aumentar</button>
+
+
+    <div *ngFor="let name of namesArray">
+        <p>{{name}}</p>
+    </div>
+
+    {{ myDate | date:'dd/MM/yyyy'}}
+
+    <app-perfil-usuario></app-perfil-usuario>
+</div>
+
+<ng-template #content>
+    cargando....
+</ng-template>
