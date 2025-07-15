@@ -22,3 +22,15 @@
     cargando....
     <app-hijo [name]="name"></app-hijo>
 </ng-template>
+
+<form [formGroup]="form">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input id="nombre" class="form-control" type="text" placeholder="Ingrese nombre..." aria-label="Nombre">
+    </div>
+    <div style="color: red;" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+        El nombre es obligatorio
+    </div>
+</form>
+
+{{ form.value | json}}
