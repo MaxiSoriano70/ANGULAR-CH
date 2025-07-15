@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { StudentComponent } from "./student/student.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -13,6 +13,8 @@ import { HijoComponent } from './hijo/hijo.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  @ViewChild("btnMain") btnMain!:ElementRef<HTMLButtonElement>;
+
   name : string = "celeste";
   title = 'proyecto_prueba';
   edad = 27;
@@ -20,6 +22,11 @@ export class AppComponent {
   loading = true;
   namesArray = ["Celeste", "Melissa", "Tati"];
   myDate = new Date();
+
+  ngAfterViewIbit(){
+    console.log("btnMain", this.btnMain.nativeElement);
+    this.btnMain.nativeElement.blur();
+  }
 
   ngOnInit(){
     setTimeout(()=>{
