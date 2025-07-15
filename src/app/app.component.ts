@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { StudentComponent } from "./student/student.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit, OnInit{
   form: FormGroup;
 
   @ViewChild("btnMain") btnMain!:ElementRef<HTMLButtonElement>;
@@ -33,19 +33,17 @@ export class AppComponent {
   }
 
   /* DUDA */
-  /*ngAfterViewInit(){
-    console.log("btnMain", this.btnMain.nativeElement);
+  ngAfterViewInit(){
+    setTimeout(() => {
+      console.log("btnMain", this.btnMain.nativeElement);
     this.btnMain.nativeElement.blur();
-  }*/
+  },10000);
+  }
 
   ngOnInit(){
   setTimeout(() => {
     this.loading = false;
     this.name = "CELESTE";
-
-    setTimeout(() => {
-      this.btnMain?.nativeElement.blur();
-    });
   }, 10000);
 }
 

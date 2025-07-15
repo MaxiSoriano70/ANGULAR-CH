@@ -14,8 +14,6 @@
     <app-perfil-usuario></app-perfil-usuario>
 
     <app-hijo [name]="name" (nameChange)="nameChange($event)"></app-hijo>
-
-    <button #btnMain type="button" class="btn btn-success">Success</button>
 </div>
 
 <ng-template #content>
@@ -23,10 +21,12 @@
     <app-hijo [name]="name"></app-hijo>
 </ng-template>
 
+<button #btnMain type="button" class="btn btn-success">Success</button>
+
 <form [formGroup]="form">
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
-        <input id="nombre" class="form-control" type="text" placeholder="Ingrese nombre..." aria-label="Nombre">
+        <input formControlName="nombre" id="nombre" class="form-control" type="text" placeholder="Ingrese nombre..." aria-label="Nombre">
     </div>
     <div style="color: red;" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
         El nombre es obligatorio
