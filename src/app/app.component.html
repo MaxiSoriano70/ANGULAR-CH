@@ -12,8 +12,11 @@
     {{ myDate | date:'dd/MM/yyyy'}}
 
     <app-perfil-usuario></app-perfil-usuario>
+
+    <app-hijo [name]="name" (nameChange)="nameChange($event)"></app-hijo>
 </div>
 
 <ng-template #content>
     cargando....
+    <app-hijo [name]="name"></app-hijo>
 </ng-template>
