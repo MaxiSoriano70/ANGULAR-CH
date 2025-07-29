@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 /* SERVICIOS
 SE CREAN EN EL COMPONENTE DONDE SE VAN A UTILIZAR
 SI EL GLOBAL VA EN SHARED/SERVICIOS
@@ -8,7 +9,7 @@ SI EL GLOBAL VA EN SHARED/SERVICIOS
   providedIn: 'root'
 })
 
-export class AlumnosServiceService {
+export class AlumnosService {
   private nombre = "pepe"
 
   constructor() { }
@@ -29,4 +30,14 @@ export class AlumnosServiceService {
   getNombre(){
     return this.nombre;
   }
+
+  getObs() {
+    const observable = new Observable<number>((observer) => {
+      observer.next(1);
+      observer.next(2);
+      observer.complete();
+    });
+    return observable;
+  }
+
 }

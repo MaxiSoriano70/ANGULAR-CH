@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PerfilUsuarioComponent } from "./perfil-usuario/perfil-usuario.component";
 import { HijoComponent } from './hijo/hijo.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AlumnosServiceService } from './alumnos-service.service';
+import { AlumnosService } from './alumnos-service.service';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,8 @@ export class AppComponent implements AfterViewInit, OnInit{
   namesArray = ["Celeste", "Melissa", "Tati"];
   myDate = new Date();
 
-  constructor(private fb: FormBuilder, private alumnosServiceService: AlumnosServiceService){
+  /* LOS SERVICIOS SIEMPRE SE DACLARAN EN EL CONSTRUCTOR */
+  constructor(private fb: FormBuilder, private alumnosService: AlumnosService){
     this.form = this.fb.group({
       nombre: ["", [Validators.required, Validators.minLength(3)]]
     });
@@ -49,7 +50,11 @@ export class AppComponent implements AfterViewInit, OnInit{
      * CAMBIAR DATOS DEL TEMPLATE
      * DE MAS
      */
-    this.estudiantes = this.alumnosServiceService.getAlumnosSinId();
+    this.estudiantes = this.alumnosService.getAlumnosSinId();
+    /**TRAEMOS EL OBSERVABLE DEL HIJO Y CON SUSSCRIBE ESCUHAMOS SI EMITE EVENTOS */
+    this.alumnosService.getObs().subscribe(
+      value => console.log(value)
+    );
     setTimeout(() => {
       this.loading = false;
       this.name = "CELESTE";
@@ -60,4 +65,15 @@ export class AppComponent implements AfterViewInit, OnInit{
     this.name = newName;
     console.log("Nombre cambiado a:", this.name);
   }
+
+  /** FUNCIONES
+ * ✅ PURAS: NO dependen de variables externas (como this.algo).
+ *           Solo usan sus propios parámetros.
+ *           Siempre devuelven el mismo resultado si los parámetros son iguales.
+ *
+ * ❌ IMPURAS: Usan o modifican variables externas (estado global o this.algo),
+ *             hacen efectos secundarios (peticiones, acceso al DOM, logs, etc.).
+ *             El resultado puede cambiar aunque los parámetros sean los mismos.
+ */
+
 }
