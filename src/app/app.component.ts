@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PerfilUsuarioComponent } from "./perfil-usuario/perfil-usuario.component";
 import { HijoComponent } from './hijo/hijo.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AlumnosServiceService } from './alumnos-service.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent implements AfterViewInit, OnInit{
 
   @ViewChild("btnMain") btnMain!:ElementRef<HTMLButtonElement>;
 
+  estudiantes : any;
+
   name : string = "celeste";
   title = 'proyecto_prueba';
   edad = 27;
@@ -26,7 +29,7 @@ export class AppComponent implements AfterViewInit, OnInit{
   namesArray = ["Celeste", "Melissa", "Tati"];
   myDate = new Date();
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private alumnosServiceService: AlumnosServiceService){
     this.form = this.fb.group({
       nombre: ["", [Validators.required, Validators.minLength(3)]]
     });
@@ -36,17 +39,22 @@ export class AppComponent implements AfterViewInit, OnInit{
   ngAfterViewInit(){
     setTimeout(() => {
       console.log("btnMain", this.btnMain.nativeElement);
-    this.btnMain.nativeElement.blur();
-  },10000);
+      this.btnMain.nativeElement.blur();
+    },10000);
   }
 
   ngOnInit(){
-  setTimeout(() => {
-    this.loading = false;
-    this.name = "CELESTE";
-  }, 10000);
-}
-
+    /**PODEMOS
+     * PEDIR DATOS A UNA API
+     * CAMBIAR DATOS DEL TEMPLATE
+     * DE MAS
+     */
+    this.estudiantes = this.alumnosServiceService.getAlumnosSinId();
+    setTimeout(() => {
+      this.loading = false;
+      this.name = "CELESTE";
+    }, 10000);
+  }
 
   nameChange(newName : string){
     this.name = newName;
