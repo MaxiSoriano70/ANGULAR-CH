@@ -7,6 +7,8 @@ import { PerfilUsuarioComponent } from "./perfil-usuario/perfil-usuario.componen
 import { HijoComponent } from './hijo/hijo.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AlumnosService } from './alumnos-service.service';
+import { Observable } from 'rxjs';
+import { Student } from './shared/entities';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,7 @@ export class AppComponent implements AfterViewInit, OnInit{
   @ViewChild("btnMain") btnMain!:ElementRef<HTMLButtonElement>;
 
   estudiantes : any;
+  estudiantesObs! : Observable<Student[]>;
 
   name : string = "celeste";
   title = 'proyecto_prueba';
@@ -55,6 +58,8 @@ export class AppComponent implements AfterViewInit, OnInit{
     this.alumnosService.getObs().subscribe(
       value => console.log(value)
     );
+
+    this.estudiantesObs = this.alumnosService.getAlumnosObs();
     setTimeout(() => {
       this.loading = false;
       this.name = "CELESTE";

@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { Student } from './shared/entities';
 /* SERVICIOS
 SE CREAN EN EL COMPONENTE DONDE SE VAN A UTILIZAR
 SI EL GLOBAL VA EN SHARED/SERVICIOS
@@ -10,9 +12,10 @@ SI EL GLOBAL VA EN SHARED/SERVICIOS
 })
 
 export class AlumnosService {
+  private onDestroys$ = new Subject<void>();
   private nombre = "pepe"
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   /* Por defecto en un servicio los metodos son PUBLIC*/
   private getAlumnos(){
@@ -29,6 +32,12 @@ export class AlumnosService {
 
   getNombre(){
     return this.nombre;
+  }
+
+  getAlumnosObs(): Observable<Student[]>{
+    return this.http.get<Student[]>('assets/mocks/students.json').pipe(
+      takeUntil(this.onDestroys$)
+    )
   }
 
   getObs() {
