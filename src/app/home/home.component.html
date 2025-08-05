@@ -1,0 +1,42 @@
+<p>home works!</p>
+<div *ngIf="loading === false; else content" class="container">
+    {{ edad }}
+    <button [disabled]="isDisabled" (click)="edad = edad +1">Aumentar</button>
+
+
+    <div *ngFor="let name of namesArray">
+        <p>{{name}}</p>
+    </div>
+
+    {{ myDate | date:'dd/MM/yyyy'}}
+
+    <app-perfil-usuario></app-perfil-usuario>
+
+    <app-hijo [name]="name" (nameChange)="nameChange($event)"></app-hijo>
+</div>
+
+<ng-template #content>
+    cargando....
+    <app-hijo [name]="name"></app-hijo>
+</ng-template>
+
+
+<button #btnMain type="button" class="btn btn-success">Success</button>
+
+<form [formGroup]="form">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input formControlName="nombre" id="nombre" class="form-control" type="text" placeholder="Ingrese nombre..." aria-label="Nombre">
+    </div>
+    <div style="color: red;" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+        El nombre es obligatorio
+    </div>
+</form>
+
+{{ form.value | json}}
+
+
+{{ estudiantes | json}}
+
+<h2>OBSERVABLE</h2>
+{{ estudiantesObs | async | json }}
