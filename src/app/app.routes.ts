@@ -3,15 +3,16 @@ import { HomeComponent } from './home/home.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { Error404Component } from './error404/error404.component';
 import { RoutePaths } from './shared/routes';
+import { firsguardGuard } from './shared/guards/firsguard.guard';
 
 export const routes: Routes = [
     {
         path: RoutePaths.HOME,
-        component: HomeComponent
+        component: HomeComponent,
     },
     {
         path: RoutePaths.USUARIOS,
-        component: UsuarioComponent
+        component: UsuarioComponent,
     },
     {
         path: `${RoutePaths.USUARIOS}/:id`,
