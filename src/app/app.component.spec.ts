@@ -1,12 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   //CONFIGURACION
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       //si hay mas dependencias debo mockearlas
-      imports: [AppComponent],
+      imports: [AppComponent, RouterTestingModule],
     }).compileComponents();
   });
 
@@ -30,7 +31,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, proyecto_prueba');
   });*/
 
-  it('deberia retornar un titulo incorrecto', () =>{
+  fit('deberia retornar un titulo incorrecto', () =>{
     // SET UP
     const fixture = TestBed.createComponent(AppComponent);
     // el fixture = expone o trae el DERECTCHANGES, COMPONENT, DOM

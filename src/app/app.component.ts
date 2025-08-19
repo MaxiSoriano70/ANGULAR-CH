@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   selector: 'app-root',
   imports: [ReactiveFormsModule, StudentComponent, NavbarComponent, CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'practicas';
