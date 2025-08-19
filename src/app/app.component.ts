@@ -13,4 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'practicas';
+
+  obtenerTitulo(){
+    return "Hola mundo";
+  }
 }
